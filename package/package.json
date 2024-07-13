@@ -18,8 +18,10 @@
     "update:pkgs": "volta pin npm@10 node@22 && ncu -u"
   },
   "dependencies": {
+    "inversify": "6.0.2",
     "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react-dom": "18.3.1",
+    "swr": "2.2.5"
   },
   "devDependencies": {
     "@types/react": "18.3.3",
