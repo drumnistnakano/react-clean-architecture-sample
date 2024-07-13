@@ -1,0 +1,37 @@
+{
+  "$schema": "node_modules/@biomejs/biome/configuration_schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    },
+    "ignore": [
+      "*.d.ts",
+      "dist/**/*",
+      "node_modules/**/*",
+      "build/**/*",
+      "public/**/*",
+      "cdk.out/**/*"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "lineWidth": 80,
+    "ignore": [
+      "*.d.ts",
+      "dist/**/*",
+      "node_modules/**/*",
+      "build/**/*",
+      "public/**/*"
+    ]
+  },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  }
+}

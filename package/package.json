@@ -1,0 +1,30 @@
+{
+  "name": "package",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -b && vite build",
+    "check": "run-p check:*",
+    "check:code": "biome lint ./",
+    "check:style": "biome format ./",
+    "check:tsc": "tsc --noEmit",
+    "dev": "vite",
+    "fix": "run-p fix:*",
+    "fix:code": "biome lint --write --no-errors-on-unmatched ./",
+    "fix:format": "biome format --write --no-errors-on-unmatched ./",
+    "preview": "vite preview",
+    "sort": "sort-package-json",
+    "update:pkgs": "volta pin npm@10 node@22 && ncu -u"
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "@vitejs/plugin-react-swc": "3.7.0",
+    "typescript": "5.5.3",
+    "vite": "5.3.3"
+  }
+}
