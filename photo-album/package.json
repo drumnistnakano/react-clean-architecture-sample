@@ -1,5 +1,5 @@
 {
-  "name": "package",
+  "name": "photo-album",
   "private": true,
   "type": "module",
   "scripts": {

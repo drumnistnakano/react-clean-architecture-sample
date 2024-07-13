@@ -4,7 +4,7 @@
   "type": "module",
   "description": "react clean architecture sample",
   "workspaces": [
-    "package"
+    "photo-album"
   ],
   "scripts": {
     "sort": "npm run sort -ws",
@@ -19,8 +19,8 @@
       "bash -c 'npm run sort'"
     ],
     "package/**/*": [
-      "bash -c 'npm run check -w package'",
-      "bash -c 'npm run fix -w package'",
+      "bash -c 'npm run check -w photo-album'",
+      "bash -c 'npm run fix -w photo-album'",
       "bash -c 'npm run check:spell'"
     ]
   },
