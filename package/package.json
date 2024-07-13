@@ -13,6 +13,7 @@
     "fix:code": "biome lint --write --no-errors-on-unmatched ./",
     "fix:format": "biome format --write --no-errors-on-unmatched ./",
     "preview": "vite preview",
+    "serve": "vite --port 3000",
     "sort": "sort-package-json",
     "update:pkgs": "volta pin npm@10 node@22 && ncu -u"
   },
