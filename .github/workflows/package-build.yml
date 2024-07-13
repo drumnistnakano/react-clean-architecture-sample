@@ -1,0 +1,40 @@
+name: package-build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  web-build:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # @see https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/customizing-github-hosted-runners#installing-software-on-ubuntu-runners
+      - name: Run sudo apt-get update before installing a package
+        run: sudo apt-get update
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: "package.json"
+          cache: npm
+
+      - name: Setup Volta CLI
+        uses: volta-cli/action@v4
+
+      - name: Cache node_modules directory
+        uses: actions/cache@v4
+        id: node_modules_cache
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install dependencies if cache does not exist
+        if: ${{ steps.node_modules_cache.outputs.cache-hit != 'true' }}
+        run: npm ci
