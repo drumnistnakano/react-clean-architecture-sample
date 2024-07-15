@@ -15,6 +15,10 @@
     "preview": "vite preview",
     "serve": "vite --port 3000",
     "sort": "sort-package-json",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui",
+    "test:watch": "vitest watch",
     "update:pkgs": "volta pin npm@10 node@22 && ncu -u"
   },
   "dependencies": {
@@ -27,7 +31,10 @@
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
     "@vitejs/plugin-react-swc": "3.7.0",
+    "@vitest/coverage-v8": "2.0.3",
     "typescript": "5.5.3",
-    "vite": "5.3.3"
+    "vite": "5.3.3",
+    "vite-tsconfig-paths": "4.3.2",
+    "vitest": "2.0.3"
   }
 }

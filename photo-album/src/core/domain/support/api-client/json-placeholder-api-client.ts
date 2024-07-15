@@ -28,8 +28,10 @@ export type CommonJsonPlaceholderApiErrors =
   | JsonPlaceholderApiValidationError
   | JsonPlaceholderApiUnexpectedError;
 
-export type JsonPlaceholderApiResult<T> = Result<
-  T,
+export type JsonPlaceholderApiResponse = Album | Photo;
+
+export type JsonPlaceholderApiResult = Result<
+  JsonPlaceholderApiResponse,
   CommonJsonPlaceholderApiErrors
 >;
 
@@ -47,8 +49,8 @@ export interface JsonPlaceholderApiClient {
    * JSONPlaceholder API の GETメソッド
    *
    * @param {JsonPlaceholderApiProps} params
-   * @return {*}  {(JsonPlaceholderApiResult<Album | Photo>)}
+   * @return {*}  {JsonPlaceholderApiResult}
    * @memberof JsonPlaceholderApiClient
    */
-  get(params: JsonPlaceholderApiProps): JsonPlaceholderApiResult<Album | Photo>;
+  get(params: JsonPlaceholderApiProps): Promise<JsonPlaceholderApiResult>;
 }
