@@ -38,3 +38,17 @@ jobs:
       - name: Install dependencies if cache does not exist
         if: ${{ steps.node_modules_cache.outputs.cache-hit != 'true' }}
         run: npm ci
+
+      - name: Cache vitest directory
+        uses: actions/cache@v4
+        id: vitest_cache
+        env:
+          cache-name: cache-vitest
+        with:
+          # @see https://vitest.dev/config/#server-deps-cachedir
+          path: "photo-album/node_modules/.cache/vitest"
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Run tests
+        run: |
+          npm run test -w photo-album
