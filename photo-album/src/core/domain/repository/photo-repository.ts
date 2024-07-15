@@ -21,7 +21,10 @@ export type CommonPhotoRepositoryErrors =
   | PhotoRepositoryNotFoundError
   | PhotoRepositoryApiResponseSchemaError;
 
-export type FindPhotosByAlbumIdResult = Result<Photo[], CommonPhotoRepositoryErrors>;
+export type FindPhotosByAlbumIdResult = Result<
+  Photo[],
+  CommonPhotoRepositoryErrors
+>;
 
 /**
  * Photo リポジトリインターフェース

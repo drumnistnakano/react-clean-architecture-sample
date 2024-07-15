@@ -18,7 +18,7 @@
     "**/package.json": [
       "bash -c 'npm run sort'"
     ],
-    "package/**/*": [
+    "photo-album/**/*": [
       "bash -c 'npm run check -w photo-album'",
       "bash -c 'npm run fix -w photo-album'",
       "bash -c 'npm run check:spell'"

@@ -12,7 +12,7 @@ export type Failure<E extends Error> = {
  * 結果を表す型。成功の場合は `Success<T>`、失敗の場合は `Failure<E>`。
  *
  * @see https://stackoverflow.com/questions/65492464/typescript-never-type-condition
- * 
+ *
  * @template T 成功時のデータ型
  * @template E 失敗時のエラー型
  *

@@ -1,8 +1,5 @@
 import type { Album } from "@/core/domain/entities/album";
-import {
-  AlbumRepositoryNotFoundError,
-  AlbumRepositoryUnexpectedError,
-} from "@/core/domain/repository/album-repository";
+import { AlbumRepositoryUnexpectedError } from "@/core/domain/repository/album-repository";
 import {
   type JsonPlaceholderApiResponse,
   JsonPlaceholderApiUnexpectedError,
