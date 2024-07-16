@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import useSWR from "swr";
-import { useFetchPhotos } from "../../presenter/useFetchPhotos";
+import { useFetchPhotos } from "../../presenters/useFetchPhotos";
 import { DIContainerContext } from "../../util/container-context";
 
 interface PhotoListProps {

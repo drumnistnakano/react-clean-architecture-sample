@@ -1,8 +1,8 @@
 import { registerContainer } from "@/di-container/register-container";
 import { confirm, number, select } from "@inquirer/prompts";
 import { config } from "dotenv";
-import { findAlbumController } from "./controller/find-album-controller";
-import { findPhotoController } from "./controller/find-photo-controller";
+import { findAlbumController } from "./controllers/find-album-controller";
+import { findPhotoController } from "./controllers/find-photo-controller";
 
 const controllersChoices = [
   { name: "すべてのアルバムを取得する", value: "すべてのアルバムを取得する" },

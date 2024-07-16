@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import useSWR from "swr";
-import { useFetchAlbums } from "../../presenter/useFetchAlbums";
+import { useFetchAlbums } from "../../presenters/useFetchAlbums";
 import { DIContainerContext } from "../../util/container-context";
 
 interface AlbumListProps {
