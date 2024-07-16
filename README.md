@@ -23,7 +23,7 @@ WIP
 1. Clone the repository:
 
 ```sh
-git clone https://github.com/drumnistnakano/react-clean-architecture-sample
+git clone https://github.com/drumnistnakano/react-clean-architecture-sample.git
 ```
 
 2. Install dependencies:
