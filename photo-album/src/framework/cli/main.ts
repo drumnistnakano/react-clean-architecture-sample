@@ -1,3 +1,4 @@
+import { registerContainer } from "@/di-container/register-container";
 import { confirm, number, select } from "@inquirer/prompts";
 import { config } from "dotenv";
 import { findAlbumController } from "./controller/find-album-controller";
@@ -9,6 +10,8 @@ const controllersChoices = [
 ] as const;
 
 export const main = async (): Promise<void> => {
+  const container = registerContainer({ frameWorkMode: "CLI" });
+
   const message = "CLIで実行するタスクを選択してください";
   const controllerAnswers = await select({
     message,
@@ -26,7 +29,7 @@ export const main = async (): Promise<void> => {
 
   switch (controller) {
     case "すべてのアルバムを取得する": {
-      await findAlbumController();
+      await findAlbumController({ container });
       break;
     }
     case "アルバムIDで写真を取得する": {
@@ -41,7 +44,7 @@ export const main = async (): Promise<void> => {
         break;
       }
 
-      await findPhotoController(albumId);
+      await findPhotoController({ container, albumId: albumId.toString() });
       break;
     }
     default: {

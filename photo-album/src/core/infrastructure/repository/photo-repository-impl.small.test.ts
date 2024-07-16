@@ -48,7 +48,7 @@ describe("PhotoRepositoryImpl", () => {
         },
       });
 
-      const result = await photoRepository.findByAlbumId(1);
+      const result = await photoRepository.findByAlbumId("1");
 
       expect(result.success).toBe(true);
       expect((result as Success<Photo[]>).data).toEqual([
@@ -77,7 +77,7 @@ describe("PhotoRepositoryImpl", () => {
         },
       });
 
-      const result = await photoRepository.findByAlbumId(1);
+      const result = await photoRepository.findByAlbumId("1");
 
       expect(result).toEqual({
         success: false,
@@ -93,7 +93,7 @@ describe("PhotoRepositoryImpl", () => {
         },
       });
 
-      const result = await photoRepository.findByAlbumId(1);
+      const result = await photoRepository.findByAlbumId("1");
 
       expect(result).toEqual({
         success: true,

@@ -7,49 +7,38 @@ export class FindAlbumUseCaseByUnexpectedError extends Error {
   override name = "FindAlbumUseCaseByUnexpectedError" as const;
 }
 
-export type CommonFindAlbumUseCaseErrors = FindAlbumUseCaseByUnexpectedError;
-
 export type FindAlbumUseCaseResult = Result<
   FindAlbumUseCaseResponseDto,
-  CommonFindAlbumUseCaseErrors
+  FindAlbumUseCaseByUnexpectedError
 >;
 
 export type FindAlbumUseCase = () => Promise<FindAlbumUseCaseResult>;
 
-export const buildFindAlbumUseCase =
-  ({
-    albumRepository,
-    logger,
-  }: {
-    albumRepository: AlbumRepository;
-    logger: Logger;
-  }): FindAlbumUseCase =>
-  async () => {
+export const buildFindAlbumUseCase = ({
+  albumRepository,
+  logger,
+}: {
+  albumRepository: AlbumRepository;
+  logger: Logger;
+}): FindAlbumUseCase => {
+  return async () => {
     logger.debug({ message: "use-case: find-album-use-case-impl" });
 
-    try {
-      const albums = await albumRepository.findAll();
-      if (albums.success === false) {
-        return {
-          success: false,
-          error: new FindAlbumUseCaseByUnexpectedError(),
-        };
-      }
+    const result = await albumRepository.findAll();
 
-      return {
-        success: true,
-        data: new FindAlbumUseCaseResponseDto({
-          albums: albums.data,
-        }),
-      };
-    } catch (error) {
+    if (result.success === false) {
       logger.error({
-        message: "Unexpected error occurred in find-album-use-case",
-        error,
+        message: "Unexpected error occurred in FindAlbumUseCase",
       });
       return {
         success: false,
         error: new FindAlbumUseCaseByUnexpectedError(),
       };
     }
+
+    return {
+      success: true,
+      data: new FindAlbumUseCaseResponseDto({ albums: result.data }),
+    };
   };
+};

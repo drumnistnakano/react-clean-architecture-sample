@@ -10,14 +10,19 @@ import { buildFindAlbumUseCase } from "@/core/usecase/find-album-use-case-impl";
 import { buildFindPhotoUseCase } from "@/core/usecase/find-photo-use-case-impl";
 import * as serviceId from "@/di-container/service-id";
 import { Container } from "inversify";
-import { unwrapEnv } from "./env-util";
+import { unwrapEnvForCli, unwrapEnvForVite } from "./env-util";
 
 /**
  * DIコンテナに値を登録し、そのDIコンテナを返す
  *
+ * @param {frameWorkMode} framework種別（CLI/WEB）
  * @returns {Container} DIコンテナ
  */
-export const registerContainer = (): Container => {
+
+export const registerContainer = (params: {
+  frameWorkMode?: string;
+}): Container => {
+  const { frameWorkMode } = params;
   const container = new Container();
 
   /**
@@ -25,7 +30,12 @@ export const registerContainer = (): Container => {
    */
   container
     .bind(serviceId.JSON_PLACEHOLDER_API_ENDPOINT)
-    .toDynamicValue(() => unwrapEnv("JSON_PLACEHOLDER_API_ENDPOINT"))
+    .toDynamicValue(() => {
+      if (frameWorkMode === "CLI") {
+        return unwrapEnvForCli("JSON_PLACEHOLDER_API_ENDPOINT");
+      }
+      return unwrapEnvForVite("JSON_PLACEHOLDER_API_ENDPOINT");
+    })
     .inSingletonScope();
 
   /**

@@ -34,9 +34,9 @@ export type FindPhotosByAlbumIdResult = Result<
 export interface PhotoRepository {
   /**
    * 指定されたアルバムIDの写真を取得します
-   * @param {number} albumId
+   * @param {string} albumId
    * @return {*}  {Promise<FindPhotosByAlbumIdResult>}
    * @memberof PhotoRepository
    */
-  findByAlbumId(albumId: number): Promise<FindPhotosByAlbumIdResult>;
+  findByAlbumId(albumId: string): Promise<FindPhotosByAlbumIdResult>;
 }

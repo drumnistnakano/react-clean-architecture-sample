@@ -1,10 +1,11 @@
 import type { Logger } from "@/core/domain/support/logger";
 import type { FindAlbumUseCase } from "@/core/usecase/find-album-use-case-impl";
-import { registerContainer } from "@/di-container/register-container";
 import { FIND_ALBUM_USE_CASE, LOGGER } from "@/di-container/service-id";
+import type { Container } from "inversify";
 
-export const findAlbumController = async (): Promise<void> => {
-  const container = registerContainer();
+export const findAlbumController = async ({
+  container,
+}: { container: Container }): Promise<void> => {
   const logger = container.get<Logger>(LOGGER);
   const findAlbumUseCase = container.get<FindAlbumUseCase>(FIND_ALBUM_USE_CASE);
 

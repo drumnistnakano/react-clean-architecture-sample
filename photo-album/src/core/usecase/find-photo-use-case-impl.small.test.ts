@@ -33,22 +33,25 @@ describe("FindPhotoUseCase tests", () => {
       logger: new LoggerDummy(),
     });
 
-    const result = await findPhotoUseCase(1);
+    const result = await findPhotoUseCase("1");
     expect(result).toEqual({
-      photos: [
-        {
-          id: 1,
-          title: "Photo 1",
-          url: "https://via.placeholder.com/600/92c952",
-          thumbnailUrl: "https://via.placeholder.com/150/92c952",
-        },
-        {
-          id: 2,
-          title: "Photo 2",
-          url: "https://via.placeholder.com/600/771796",
-          thumbnailUrl: "https://via.placeholder.com/150/771796",
-        },
-      ],
+      success: true,
+      data: {
+        photos: [
+          {
+            id: 1,
+            title: "Photo 1",
+            url: "https://via.placeholder.com/600/92c952",
+            thumbnailUrl: "https://via.placeholder.com/150/92c952",
+          },
+          {
+            id: 2,
+            title: "Photo 2",
+            url: "https://via.placeholder.com/600/771796",
+            thumbnailUrl: "https://via.placeholder.com/150/771796",
+          },
+        ],
+      },
     });
   });
 
@@ -66,9 +69,11 @@ describe("FindPhotoUseCase tests", () => {
       logger: new LoggerDummy(),
     });
 
-    await expect(findPhotoUseCase(1)).rejects.toThrow(
-      FindPhotoUseCaseByUnexpectedError,
-    );
+    const result = await findPhotoUseCase("1");
+    expect(result).toEqual({
+      success: false,
+      error: new FindPhotoUseCaseByUnexpectedError(),
+    });
   });
 
   test("should return empty array when no photos are found", async () => {
@@ -82,9 +87,10 @@ describe("FindPhotoUseCase tests", () => {
       logger: new LoggerDummy(),
     });
 
-    const result = await findPhotoUseCase(1);
+    const result = await findPhotoUseCase("1");
     expect(result).toEqual({
-      photos: [],
+      success: true,
+      data: { photos: [] },
     });
   });
 });

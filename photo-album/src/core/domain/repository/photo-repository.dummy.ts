@@ -17,7 +17,7 @@ export class PhotoRepositoryDummy implements PhotoRepository {
     };
   }
 
-  async findByAlbumId(_albumId: number): Promise<FindPhotosByAlbumIdResult> {
+  async findByAlbumId(_albumId: string): Promise<FindPhotosByAlbumIdResult> {
     return this.#findByAlbumIdReturnValue;
   }
 }

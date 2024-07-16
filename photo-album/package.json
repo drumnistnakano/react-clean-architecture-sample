@@ -14,7 +14,7 @@
     "fix:code": "biome lint --write --no-errors-on-unmatched ./",
     "fix:format": "biome format --write --no-errors-on-unmatched ./",
     "preview": "vite preview",
-    "serve": "vite --port 3000",
+    "serve": "vite --port 3000 --mode web",
     "sort": "sort-package-json",
     "start": "npx tsx",
     "test": "vitest run",
@@ -24,9 +24,11 @@
     "update:pkgs": "volta pin npm@10 node@22 && ncu -u"
   },
   "dependencies": {
+    "@vanilla-extract/css": "1.15.3",
     "inversify": "6.0.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "react-router-dom": "6.24.1",
     "swr": "2.2.5",
     "zod": "3.23.8"
   },
@@ -34,6 +36,7 @@
     "@inquirer/prompts": "5.1.2",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
+    "@vanilla-extract/vite-plugin": "4.0.13",
     "@vitejs/plugin-react-swc": "3.7.0",
     "@vitest/coverage-v8": "2.0.3",
     "dotenv": "16.4.5",

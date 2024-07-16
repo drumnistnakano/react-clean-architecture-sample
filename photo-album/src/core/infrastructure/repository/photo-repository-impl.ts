@@ -19,7 +19,7 @@ export class PhotoRepositoryImpl implements PhotoRepository {
     this.logger = logger;
   }
 
-  async findByAlbumId(albumId: number): Promise<FindPhotosByAlbumIdResult> {
+  async findByAlbumId(albumId: string): Promise<FindPhotosByAlbumIdResult> {
     try {
       const result = await this.apiClient.get({
         path: `/albums/${albumId}/photos`,
