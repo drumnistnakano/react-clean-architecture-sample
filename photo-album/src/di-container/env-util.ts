@@ -16,7 +16,7 @@ export class NotFoundEnvError extends Error {
  */
 export const unwrapEnv = (envName: string): string => {
   const viteEnv = `VITE_${envName}`;
-  const envValue = import.meta.env[viteEnv];
+  const envValue = process.env[viteEnv];
   if (envValue == null) {
     throw new NotFoundEnvError(envName);
   }

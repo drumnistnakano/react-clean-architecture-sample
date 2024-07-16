@@ -39,13 +39,14 @@ export const registerContainer = (): Container => {
    */
   container
     .bind(serviceId.JSON_PLACEHOLDER_API_CLIENT)
-    .toDynamicValue((ctx) => {
-      return new JsonPlaceholderApiClientImpl({
-        apiUrl: ctx.container.get<string>(
-          serviceId.JSON_PLACEHOLDER_API_ENDPOINT,
-        ),
-      });
-    })
+    .toDynamicValue(
+      (ctx) =>
+        new JsonPlaceholderApiClientImpl({
+          apiUrl: ctx.container.get<string>(
+            serviceId.JSON_PLACEHOLDER_API_ENDPOINT,
+          ),
+        }),
+    )
     .inSingletonScope();
 
   /**
@@ -78,14 +79,17 @@ export const registerContainer = (): Container => {
   /**
    * UseCase
    */
-  container.bind(serviceId.FIND_ALBUM_USE_CASE).toDynamicValue((ctx) => {
-    buildFindAlbumUseCase({
-      albumRepository: ctx.container.get<AlbumRepository>(
-        serviceId.ALBUM_REPOSITORY,
-      ),
-      logger: ctx.container.get<Logger>(serviceId.LOGGER),
-    });
-  });
+  container
+    .bind(serviceId.FIND_ALBUM_USE_CASE)
+    .toDynamicValue((ctx) =>
+      buildFindAlbumUseCase({
+        albumRepository: ctx.container.get<AlbumRepository>(
+          serviceId.ALBUM_REPOSITORY,
+        ),
+        logger: ctx.container.get<Logger>(serviceId.LOGGER),
+      }),
+    )
+    .inSingletonScope();
 
   return container;
 };

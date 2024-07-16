@@ -8,6 +8,7 @@
     "check:code": "biome lint ./",
     "check:style": "biome format ./",
     "check:tsc": "tsc --noEmit",
+    "cli": "npm run start ./src/framework/cli/main.ts",
     "dev": "vite",
     "fix": "run-p fix:*",
     "fix:code": "biome lint --write --no-errors-on-unmatched ./",
@@ -15,6 +16,7 @@
     "preview": "vite preview",
     "serve": "vite --port 3000",
     "sort": "sort-package-json",
+    "start": "npx tsx",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
@@ -29,10 +31,12 @@
     "zod": "3.23.8"
   },
   "devDependencies": {
+    "@inquirer/prompts": "5.1.2",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
     "@vitejs/plugin-react-swc": "3.7.0",
     "@vitest/coverage-v8": "2.0.3",
+    "dotenv": "16.4.5",
     "typescript": "5.5.3",
     "vite": "5.3.3",
     "vite-tsconfig-paths": "4.3.2",

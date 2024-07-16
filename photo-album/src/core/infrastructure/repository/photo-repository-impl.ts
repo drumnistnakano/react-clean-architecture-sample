@@ -3,14 +3,10 @@ import type {
   FindPhotosByAlbumIdResult,
   PhotoRepository,
 } from "@/core/domain/repository/photo-repository";
-import {
-  PhotoRepositoryApiResponseSchemaError,
-  PhotoRepositoryUnexpectedError,
-} from "@/core/domain/repository/photo-repository";
+import { PhotoRepositoryUnexpectedError } from "@/core/domain/repository/photo-repository";
 import {
   type JsonPlaceholderApiClient,
   JsonPlaceholderApiSystemError,
-  JsonPlaceholderApiValidationError,
 } from "@/core/domain/support/api-client";
 import type { Logger } from "@/core/domain/support/logger";
 
@@ -38,19 +34,6 @@ export class PhotoRepositoryImpl implements PhotoRepository {
           return {
             success: false,
             error: new PhotoRepositoryUnexpectedError(result.error.message),
-          };
-        }
-
-        if (result.error instanceof JsonPlaceholderApiValidationError) {
-          this.logger.error({
-            message: "Validation error occurred while fetching photos",
-            error: result.error,
-          });
-          return {
-            success: false,
-            error: new PhotoRepositoryApiResponseSchemaError(
-              result.error.message,
-            ),
           };
         }
 

@@ -3,14 +3,10 @@ import type {
   AlbumRepository,
   FindAllAlbumsResult,
 } from "@/core/domain/repository/album-repository";
-import {
-  AlbumRepositoryApiResponseSchemaError,
-  AlbumRepositoryUnexpectedError,
-} from "@/core/domain/repository/album-repository";
+import { AlbumRepositoryUnexpectedError } from "@/core/domain/repository/album-repository";
 import {
   type JsonPlaceholderApiClient,
   JsonPlaceholderApiSystemError,
-  JsonPlaceholderApiValidationError,
 } from "@/core/domain/support/api-client";
 import type { Logger } from "@/core/domain/support/logger";
 
@@ -25,7 +21,7 @@ export class AlbumRepositoryImpl implements AlbumRepository {
 
   async findAll(): Promise<FindAllAlbumsResult> {
     try {
-      const result = await this.apiClient.get({ path: "/albums" });
+      const result = await this.apiClient.get({ path: "albums" });
 
       if (!result.success) {
         if (result.error instanceof JsonPlaceholderApiSystemError) {
@@ -36,19 +32,6 @@ export class AlbumRepositoryImpl implements AlbumRepository {
           return {
             success: false,
             error: new AlbumRepositoryUnexpectedError(result.error.message),
-          };
-        }
-
-        if (result.error instanceof JsonPlaceholderApiValidationError) {
-          this.logger.error({
-            message: "Validation error occurred while fetching albums",
-            error: result.error,
-          });
-          return {
-            success: false,
-            error: new AlbumRepositoryApiResponseSchemaError(
-              result.error.message,
-            ),
           };
         }
 

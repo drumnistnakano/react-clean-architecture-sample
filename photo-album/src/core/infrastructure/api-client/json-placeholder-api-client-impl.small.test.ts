@@ -1,7 +1,6 @@
 import {
   JsonPlaceholderApiSystemError,
   JsonPlaceholderApiUnexpectedError,
-  JsonPlaceholderApiValidationError,
 } from "@/core/domain/support/api-client/json-placeholder-api-client";
 import { describe, expect, it, vi } from "vitest";
 import { JsonPlaceholderApiClientImpl } from "./json-placeholder-api-client-impl";
@@ -40,23 +39,6 @@ describe("JsonPlaceholderApiClientImpl", () => {
     expect(result.success).toBe(false);
     if (!result.success) {
       expect(result.error).toBeInstanceOf(JsonPlaceholderApiSystemError);
-    }
-  });
-
-  it("should return validation error on invalid response", async () => {
-    const mockResponse = { invalid: "data" };
-    globalThis.fetch = vi.fn(() =>
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve(mockResponse),
-      }),
-    ) as unknown as typeof fetch;
-
-    const result = await client.get({ path: "/albums/1" });
-
-    expect(result.success).toBe(false);
-    if (!result.success) {
-      expect(result.error).toBeInstanceOf(JsonPlaceholderApiValidationError);
     }
   });
 

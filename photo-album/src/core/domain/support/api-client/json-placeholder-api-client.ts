@@ -16,16 +16,8 @@ export class JsonPlaceholderApiSystemError extends Error {
   override name = "JsonPlaceholderApiSystemError" as const;
 }
 
-/**
- * JSONPlaceholder APIのバリデーションエラー
- */
-export class JsonPlaceholderApiValidationError extends Error {
-  override name = "JsonPlaceholderApiValidationError" as const;
-}
-
 export type CommonJsonPlaceholderApiErrors =
   | JsonPlaceholderApiSystemError
-  | JsonPlaceholderApiValidationError
   | JsonPlaceholderApiUnexpectedError;
 
 export type JsonPlaceholderApiResponse = Album | Photo;

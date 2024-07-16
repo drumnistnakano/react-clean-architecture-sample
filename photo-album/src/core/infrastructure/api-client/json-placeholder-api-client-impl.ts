@@ -1,5 +1,3 @@
-import type { Album } from "@/core/domain/entities/album";
-import type { Photo } from "@/core/domain/entities/photo";
 import type {
   JsonPlaceholderApiClient,
   JsonPlaceholderApiProps,
@@ -8,7 +6,6 @@ import type {
 import {
   JsonPlaceholderApiSystemError,
   JsonPlaceholderApiUnexpectedError,
-  JsonPlaceholderApiValidationError,
 } from "@/core/domain/support/api-client/json-placeholder-api-client";
 
 type JsonPlaceholderApiClientImplProps = {
@@ -35,21 +32,13 @@ export class JsonPlaceholderApiClientImpl implements JsonPlaceholderApiClient {
       }
 
       const data = await response.json();
-      if (!this.validateResponse(data)) {
-        throw new JsonPlaceholderApiValidationError(
-          "Response validation failed",
-        );
-      }
 
       return {
         success: true,
         data,
       };
     } catch (error) {
-      if (
-        error instanceof JsonPlaceholderApiSystemError ||
-        error instanceof JsonPlaceholderApiValidationError
-      ) {
+      if (error instanceof JsonPlaceholderApiSystemError) {
         return {
           success: false,
           error,
@@ -62,9 +51,5 @@ export class JsonPlaceholderApiClientImpl implements JsonPlaceholderApiClient {
         ),
       };
     }
-  }
-
-  private validateResponse(data: Album | Photo): data is Album | Photo {
-    return data?.id !== undefined && data?.title !== undefined;
   }
 }
