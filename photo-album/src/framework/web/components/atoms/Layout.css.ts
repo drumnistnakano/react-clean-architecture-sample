@@ -14,4 +14,21 @@ globalStyle("body", {
   width: "100%",
   textAlign: "center",
   minHeight: "100%",
+  backgroundColor: "#f4ecd8",
+  backgroundImage: `
+    repeating-linear-gradient(
+      45deg,
+      #f4ecd8 0,
+      #f4ecd8 10px,
+      #e0d8c3 10px,
+      #e0d8c3 20px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      #f4ecd8 0,
+      #f4ecd8 10px,
+      #e0d8c3 10px,
+      #e0d8c3 20px
+    )`,
+  fontFamily: "'Times New Roman', Times, serif",
 });

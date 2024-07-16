@@ -10,7 +10,7 @@ export const PhotoPage = () => {
 
   return (
     <div>
-      <h2>Photos in Album {albumId}</h2>
+      <h2>🖼️ Photos in Album {albumId} 🖼️</h2>
       <PhotoList albumId={albumId} />
     </div>
   );

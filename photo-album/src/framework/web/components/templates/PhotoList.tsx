@@ -2,6 +2,9 @@ import { useContext } from "react";
 import useSWR from "swr";
 import { useFetchPhotos } from "../../presenters/useFetchPhotos";
 import { DIContainerContext } from "../../util/container-context";
+import { Loading } from "../molecules/Loading";
+import { PhotoImage } from "../organisms/PhotoImage";
+import * as styles from "./PhotoList.css";
 
 interface PhotoListProps {
   albumId: string;
@@ -18,15 +21,15 @@ export const PhotoList: React.FC<PhotoListProps> = ({ albumId }) => {
     suspense: true,
   });
 
-  if (isPhotosLoading) return <p>Loading photos...</p>;
-  if (photosError) return <p>Error loading photos: {photosError.message}</p>;
+  if (isPhotosLoading) return <Loading />;
+  if (photosError) throw new Error(`loading photos: ${photosError.message}`);
 
   return (
-    <div>
+    <div className={styles.photoList}>
       {photos.map((photo) => (
-        <div key={photo.id}>
-          <img src={photo.thumbnailUrl} alt={photo.title} />
-          <p>{photo.title}</p>
+        <div key={photo.id} className={styles.photoCard}>
+          <PhotoImage {...photo} />
+          <div className={styles.photoTitle}>{photo.title}</div>
         </div>
       ))}
     </div>

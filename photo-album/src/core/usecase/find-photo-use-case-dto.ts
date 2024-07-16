@@ -1,6 +1,6 @@
 import type { Photo } from "@/core/domain/entities/photo";
 
-type PhotoInfo = {
+export type PhotoInfo = {
   id: number;
   title: string;
   url: string;

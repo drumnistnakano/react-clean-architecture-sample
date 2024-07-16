@@ -10,7 +10,7 @@ export const AlbumPage = () => {
 
   return (
     <div>
-      <h1>Albums</h1>
+      <h1>📸 Albums 📸</h1>
       <AlbumList onSelectAlbum={handleSelectAlbum} />
     </div>
   );
