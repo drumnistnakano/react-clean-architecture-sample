@@ -1,4 +1,5 @@
 import type { AlbumRepository } from "@/core/domain/repository/album-repository";
+import type { PhotoRepository } from "@/core/domain/repository/photo-repository";
 import type { JsonPlaceholderApiClient } from "@/core/domain/support/api-client";
 import type { Logger } from "@/core/domain/support/logger";
 import { JsonPlaceholderApiClientImpl } from "@/core/infrastructure/api-client/json-placeholder-api-client-impl";
@@ -6,9 +7,10 @@ import { LoggerImpl } from "@/core/infrastructure/logger/logger-impl";
 import { AlbumRepositoryImpl } from "@/core/infrastructure/repository/album-repository-impl";
 import { PhotoRepositoryImpl } from "@/core/infrastructure/repository/photo-repository-impl";
 import { buildFindAlbumUseCase } from "@/core/usecase/find-album-use-case-impl";
+import { buildFindPhotoUseCase } from "@/core/usecase/find-photo-use-case-impl";
+import * as serviceId from "@/di-container/service-id";
 import { Container } from "inversify";
 import { unwrapEnv } from "./env-util";
-import * as serviceId from "./service-id";
 
 /**
  * DIコンテナに値を登録し、そのDIコンテナを返す
@@ -85,6 +87,17 @@ export const registerContainer = (): Container => {
       buildFindAlbumUseCase({
         albumRepository: ctx.container.get<AlbumRepository>(
           serviceId.ALBUM_REPOSITORY,
+        ),
+        logger: ctx.container.get<Logger>(serviceId.LOGGER),
+      }),
+    )
+    .inSingletonScope();
+  container
+    .bind(serviceId.FIND_PHOTO_USE_CASE)
+    .toDynamicValue((ctx) =>
+      buildFindPhotoUseCase({
+        photoRepository: ctx.container.get<PhotoRepository>(
+          serviceId.PHOTO_REPOSITORY,
         ),
         logger: ctx.container.get<Logger>(serviceId.LOGGER),
       }),

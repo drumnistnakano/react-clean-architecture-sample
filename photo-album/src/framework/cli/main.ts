@@ -1,9 +1,11 @@
-import { confirm, select } from "@inquirer/prompts";
+import { confirm, number, select } from "@inquirer/prompts";
 import { config } from "dotenv";
 import { findAlbumController } from "./controller/find-album-controller";
+import { findPhotoController } from "./controller/find-photo-controller";
 
 const controllersChoices = [
   { name: "すべてのアルバムを取得する", value: "すべてのアルバムを取得する" },
+  { name: "アルバムIDで写真を取得する", value: "アルバムIDで写真を取得する" },
 ] as const;
 
 export const main = async (): Promise<void> => {
@@ -27,7 +29,21 @@ export const main = async (): Promise<void> => {
       await findAlbumController();
       break;
     }
+    case "アルバムIDで写真を取得する": {
+      const albumId = await number({
+        message: "アルバムIDを入力してください",
+        required: true,
+        min: 1,
+        max: 100, // @see https://jsonplaceholder.typicode.com/
+      });
+      if (albumId == null) {
+        console.error("有効なアルバムIDを入力してください");
+        break;
+      }
 
+      await findPhotoController(albumId);
+      break;
+    }
     default: {
       throw new Error(`Invalid controller. controller=${controller}`);
     }

@@ -25,3 +25,4 @@ export const PHOTO_REPOSITORY = "PHOTO_REPOSITORY" as const;
  * UseCase
  */
 export const FIND_ALBUM_USE_CASE = "FIND_ALBUM_USE_CASE" as const;
+export const FIND_PHOTO_USE_CASE = "FIND_PHOTO_USE_CASE" as const;
