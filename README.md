@@ -9,7 +9,7 @@ The Photo Album is a web application built with React, TypeScript, and Vite. It 
 
 ## Structure
 
-WIP
+![clean-architecture-structure](https://github.com/user-attachments/assets/9ee56dc6-79d8-4e5a-bc21-4fadf6e53428)
 
 ## Features
 
